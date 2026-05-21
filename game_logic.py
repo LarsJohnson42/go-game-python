@@ -19,11 +19,13 @@ turns_passed = 0
 
 game_over = False
 
+player_turn = 1
+
 
 # This code will place a stone on the board, no rules applied at this moment...
 def place_stone(game_board, row, column, player):
 
-    global captured_black_stones, captured_white_stones, previous_board_state, game_over
+    global captured_black_stones, captured_white_stones, previous_board_state, game_over, turns_passed, player_turn
 
     if game_over == False:
 
@@ -36,7 +38,6 @@ def place_stone(game_board, row, column, player):
             game_board[row - 1][column - 1] = player
             score = handle_captures(game_board, (row-1), (column-1))
 
-            #last_turn_board_state = deepcopy(previous_board_state)
 
 
             if score != 0:
@@ -181,7 +182,7 @@ def legal_move(game_board, row, column, player, ko_check_board):
 
 
 
-def pass_turn(player):
+def pass_turn():
     global turns_passed, game_over
 
     if turns_passed == 0:
@@ -192,47 +193,3 @@ def pass_turn(player):
 
     
 
-
-
-
-
-
-
-
-
-
-# First: creating the basic board state.
-
-place_stone(board, 2, 7, 1)
-
-place_stone(board, 3, 4, 2)
-place_stone(board, 2, 5, 2)
-
-place_stone(board, 3, 6, 2)
-place_stone(board, 4, 5, 2)
-
-place_stone(board, 4, 4, 1)
-place_stone(board, 4, 6, 1)
-place_stone(board, 5, 5, 1)
-
-
-#print_board(board, board_size)
-
-
-place_stone(board, 3, 5, 1)
-
-#place_stone(board, 3, 5, 1)
-
-#print_board(board, board_size)
-
-place_stone(board, 4, 5, 2)
-
-#print_board(board, board_size)
-
-place_stone(board, 3, 5, 1)
-
-pass_turn(1)
-
-pass_turn(2)
-
-place_stone(board, 1, 1, 1)
